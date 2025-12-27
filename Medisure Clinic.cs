@@ -1,4 +1,4 @@
-namespace MedisureClinic
+namespace MedisureClinic.Billing
 {
     public class PatientBill()
     {

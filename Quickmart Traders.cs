@@ -9,11 +9,12 @@ namespace QuickmartTraders.ProfitCalculator
         public decimal PurchaseAmount;
         public decimal SellingAmount;
         public decimal ProfitOrLossAmount;
-        public decimal ProfitMarginPercent;
+        public decimal ProfitOrLossMarginPercent;
         public string ProfitOrLossStatus;
 
         public bool LastTransaction=false;
 
+        
         public void RegisterTransaction()
         {
             Console.WriteLine("Enter Invoice No: ");
@@ -36,8 +37,6 @@ namespace QuickmartTraders.ProfitCalculator
             Console.WriteLine("Enter Selling Amount (total): ");
             input = Console.ReadLine();
             Decimal.TryParse(input, out SellingAmount);
-
-            LastTransaction = true;
         }
         public void ViewTransaction()
         {  
@@ -50,7 +49,7 @@ namespace QuickmartTraders.ProfitCalculator
                 Console.WriteLine($"Selling Amount: {SellingAmount}");
                 Console.WriteLine($"Status: {ProfitOrLossStatus}");
                 Console.WriteLine($"Profit/Loss Amount: {ProfitOrLossAmount}");
-                Console.WriteLine($"Profit Margin(%): {ProfitMarginPercent}");
+                Console.WriteLine($"Profit/Loss Margin(%): {ProfitOrLossMarginPercent}");
                 
                 Console.WriteLine("--------------------------------------");
             
@@ -68,6 +67,7 @@ namespace QuickmartTraders.ProfitCalculator
             {
                 ProfitOrLossStatus = "Loss";
                 ProfitOrLossAmount = Math.Round(PurchaseAmount - SellingAmount, 2);
+                //If purchase amount is greater, return purchaseAmount - sellingAmount rounded up to 2 decimals
             }
             else
             {
@@ -75,23 +75,17 @@ namespace QuickmartTraders.ProfitCalculator
                 ProfitOrLossAmount = 0;
             }
 
-            ProfitMarginPercent = Math.Round ((ProfitOrLossAmount / PurchaseAmount) * 100 , 2);
+            ProfitOrLossMarginPercent = Math.Round ((ProfitOrLossAmount / PurchaseAmount) * 100 , 2);
         }
 
-        public bool HasLastTransaction()
-        {
-            return LastTransaction;
-        }
 
-        public void printSummary()
+        public void quickCal()
         {
-            Console.WriteLine($"Status: {ProfitOrLossStatus}");
+            Console.WriteLine($"\nStatus: {ProfitOrLossStatus}");
             Console.WriteLine($"Profit/Loss Amount: {ProfitOrLossAmount}");
-            Console.WriteLine($"Profit Margin (%): {ProfitMarginPercent}");
+            Console.WriteLine($"Profit/Loss Margin (%): {ProfitOrLossMarginPercent}");
 
-            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("--------------------------------------\n");
         }
-
-
     }
 }
