@@ -1,12 +1,11 @@
 ﻿using System;
-using QuickmartTraders.ProfitCalculator;
-using MedisureClinic.Billing;
+using QuickmartTraders.Transaction;
+
 
 public class Program
 {
-
-    static SaleTransaction lastTransaction;
-    static bool HasLastTransaction = false;
+    public static SaleTransaction? LastTransaction;
+    public static bool HasLastTransaction = false;
     public static void Main(String[] args)
     {
         while(true)
@@ -22,6 +21,8 @@ public class Program
             string? input = Console.ReadLine();
             int.TryParse(input, out int choice);
 
+            Console.WriteLine("\n\n");
+
             if (choice == 4)
             {
                 Console.WriteLine("Thank you. Application closed Normally");
@@ -35,7 +36,7 @@ public class Program
                     Console.WriteLine("No transaction available. Please create a new transaction first.");
                     continue;
                 }
-                lastTransaction.Calculate();
+                LastTransaction.Calculate();
 
             }
             else if (choice == 2)
@@ -46,21 +47,25 @@ public class Program
                     Console.WriteLine("No transaction available. Please create a new transaction first.");
                     continue;
                 }
-                lastTransaction.ViewTransaction();
+                LastTransaction.View();
 
             } 
             else if (choice == 1)
             {
 
-                lastTransaction  = new SaleTransaction();
-                lastTransaction.RegisterTransaction();
+                LastTransaction  = new SaleTransaction();
+                LastTransaction.Register();
 
                 HasLastTransaction = true;
 
-                lastTransaction.Calculate();
+                LastTransaction.Calculate();
                 Console.WriteLine("\nTransaction Saved Successfully\n");
-                lastTransaction.quickCal();
+                LastTransaction.Summary();
                 
+            }
+            else
+            {
+                Console.WriteLine("\nInvalid Option. Please try again.");
             }
         }
     }

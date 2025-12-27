@@ -1,21 +1,25 @@
-namespace QuickmartTraders.ProfitCalculator
+namespace QuickmartTraders.Transaction
 {
     public class SaleTransaction
     {
-        public string InvoiceNo;
-        public string CustomerName;
-        public string ItemName;
-        public int Quantity;
-        public decimal PurchaseAmount;
-        public decimal SellingAmount;
-        public decimal ProfitOrLossAmount;
-        public decimal ProfitOrLossMarginPercent;
-        public string ProfitOrLossStatus;
+        public string? InvoiceNo{get; set;}
+        public string? CustomerName{get; set;}
+        public string? ItemName{get; set;}
 
-        public bool LastTransaction=false;
 
-        
-        public void RegisterTransaction()
+        public int Quantity{get; set;}
+        public decimal PurchaseAmount{get; set;}
+        public decimal SellingAmount{get; set;}
+
+
+        public decimal ProfitOrLossAmount{get; set;}
+        public decimal ProfitOrLossMarginPercent{get; set;}
+        public string? ProfitOrLossStatus{get; set;}
+
+
+        ///<summary>
+        /// </summary>
+        public void Register()
         {
             Console.WriteLine("Enter Invoice No: ");
             InvoiceNo = Console.ReadLine();
@@ -28,17 +32,20 @@ namespace QuickmartTraders.ProfitCalculator
 
             Console.WriteLine("Enter Quantity: ");
             string? input = Console.ReadLine();
-            int.TryParse(input, out Quantity);
+            int.TryParse(input, out int tempQuantity);
+            Quantity = tempQuantity;
 
             Console.WriteLine("Enter Purchase Amount (total): ");
             input = Console.ReadLine();
-            Decimal.TryParse(input, out PurchaseAmount);
+            Decimal.TryParse(input, out decimal tempPurchaseAmount);
+            PurchaseAmount = tempPurchaseAmount;
 
             Console.WriteLine("Enter Selling Amount (total): ");
             input = Console.ReadLine();
-            Decimal.TryParse(input, out SellingAmount);
+            Decimal.TryParse(input, out decimal tempSellingAmount);
+            SellingAmount = tempSellingAmount;
         }
-        public void ViewTransaction()
+        public void View()
         {  
                 Console.WriteLine("---------------Last Transaction--------------");
                 Console.WriteLine($"Invoice No: {InvoiceNo}");
@@ -79,7 +86,7 @@ namespace QuickmartTraders.ProfitCalculator
         }
 
 
-        public void quickCal()
+        public void Summary()
         {
             Console.WriteLine($"\nStatus: {ProfitOrLossStatus}");
             Console.WriteLine($"Profit/Loss Amount: {ProfitOrLossAmount}");
