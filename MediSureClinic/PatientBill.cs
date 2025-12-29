@@ -2,7 +2,8 @@ namespace MediSureCLinic.Billing
 {
     public class PatientBill()
     {
-        public string? BillId{get; set;}
+        #region Properties initialization
+        public string? BillId{get; set;} 
         public string? PatientName{get; set;}
         public bool HasInsurance{get; set;}
 
@@ -12,10 +13,14 @@ namespace MediSureCLinic.Billing
         public decimal GrossAmount{get; set;}
         public decimal DiscountAmount{get; set;}
         public decimal FinalPayable {get; set;}
+        #endregion
 
+        #region Method - Register()
+        /// <summary>
+        /// Method to register bill
+        /// </summary>
         public void Register()
         {
-
            Console.WriteLine("Enter Bill Id: ");
            BillId = Console.ReadLine();
 
@@ -37,21 +42,29 @@ namespace MediSureCLinic.Billing
            Console.WriteLine("Enter Medicine Charges: ");
            decimal.TryParse(Console.ReadLine(), out decimal tempMedicineCharges);
            MedicineCharges = tempMedicineCharges;
-
         }
+        #endregion
 
+        #region Method - Summary()
+        /// <summary>
+        /// Method to print the summary of the bill
+        /// </summary>
         public void Summary()
         {
             Console.WriteLine($"Gross Amount: {Math.Round(GrossAmount,2)}");
             Console.WriteLine($"Discount Amount: {Math.Round(DiscountAmount,2)}");
             Console.WriteLine($"Final Payable: {Math.Round(FinalPayable,2)}");
-            
         }
+        #endregion
 
+        #region Method - Calculate()
+        /// <summary>
+        /// Method to calculate the bill
+        /// </summary>
         public void Calculate()
         {
             GrossAmount = ConsultationFee + LabCharges + MedicineCharges;
-            if (HasInsurance)
+            if (HasInsurance) // if patient has insurance, give discount
             {
                 DiscountAmount = GrossAmount * 0.10m;
             }
@@ -61,10 +74,14 @@ namespace MediSureCLinic.Billing
             }
             FinalPayable = GrossAmount - DiscountAmount;
         }
+        #endregion
 
+        #region Method - View()
+        /// <summary>
+        /// Method to view the bill
+        /// </summary>
         public void View()
         {
-            
             Console.WriteLine("----------- Last Bill -----------");
             Console.WriteLine($"BillId: {BillId}");
             Console.WriteLine($"Patient: {PatientName}");
@@ -77,12 +94,15 @@ namespace MediSureCLinic.Billing
             Console.WriteLine($"Final Payable: {Math.Round(FinalPayable, 2)}");
 
             Console.WriteLine("--------------------------------");
-
         }
+        #endregion
 
+        #region Method - Clear()
+        /// <summary>
+        /// Method to clear the bill
+        /// </summary>
         public void Clear()
         {
-
             BillId = null;
             PatientName = null;
             HasInsurance = false;
@@ -95,5 +115,6 @@ namespace MediSureCLinic.Billing
             
             Console.WriteLine("Last bill cleared.");
         }
+        #endregion
     }
 }
