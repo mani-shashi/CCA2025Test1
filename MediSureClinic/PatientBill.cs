@@ -2,7 +2,7 @@ namespace MediSureCLinic.Billing
 {
     public class PatientBill()
     {
-        #region Properties initialization
+        #region Properties
         public string? BillId{get; set;} 
         public string? PatientName{get; set;}
         public bool HasInsurance{get; set;}
