@@ -1,7 +1,5 @@
 ﻿using System;
 using QuickmartTraders.Transaction;
-
-
 public class Program
 {
     public static SaleTransaction? LastTransaction; //store last transaction
@@ -17,6 +15,7 @@ public class Program
             Console.WriteLine("3. Calculate Profit/Loss (Recompute & Print)");
             Console.WriteLine("4. Exit\n\n");
             #endregion
+            
             Console.WriteLine("Enter your option: ");
 
             string? input = Console.ReadLine();
@@ -46,7 +45,7 @@ public class Program
                     Console.WriteLine("No transaction available. Please create a new transaction first.");
                     continue;
                 }
-                LastTransaction.View();
+                LastTransaction.View(); // view transaction detail
 
             } 
             else if (choice == 1)

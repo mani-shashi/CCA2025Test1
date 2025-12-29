@@ -2,7 +2,7 @@ namespace QuickmartTraders.Transaction
 {
     public class SaleTransaction
     {
-        #region Fields
+        #region Properties
         public string? InvoiceNo{get; set;}
         public string? CustomerName{get; set;}
         public string? ItemName{get; set;}
